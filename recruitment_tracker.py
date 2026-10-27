@@ -28,8 +28,8 @@ def updateStatus(applicant_id, status):
     try:
         conn.execute("UPDATE applicants SET status = ? WHERE id = ?", (status, applicant_id))
         conn.commit()
-    except Exception:
-        pass
+    except sqlite3.Error as err:
+        print(f"Could not update applicant {applicant_id}: {err}")
 
 def exportReport(path):
     f = open(path, "w")
