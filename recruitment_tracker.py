@@ -5,7 +5,11 @@ conn.execute("CREATE TABLE applicants (id INTEGER PRIMARY KEY, name TEXT, role T
 
 
 def addApplicant(name, role, expected_salary, status="applied"):
-    conn.execute(f"INSERT INTO applicants (name, role, expected_salary, status) VALUES ('{name}', '{role}', {expected_salary}, '{status}')")
+    conn.execute(
+        "INSERT INTO applicants (name, role, expected_salary, status) "
+        "VALUES (?, ?, ?, ?)",
+        (name, role, expected_salary, status),
+    )
     conn.commit()
 
 
